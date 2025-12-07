@@ -1,7 +1,3 @@
-Use this. Direct, neutral, stripped of hype. No decorative language. No emojis. No filler.
-
----
-
 # **Portfolio — Sasi Sundar**
 
 Static HTML/CSS/JS portfolio presenting applied work in AI/ML, LLM engineering, and backend systems. Content focuses on system design, reasoning workflows, and deployment-oriented engineering rather than visual showcase elements.
