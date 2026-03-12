@@ -1,262 +1,1415 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sasi Sundar | AI/ML Engineer</title>
-    <link rel="stylesheet" href="assets/css/redesign.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sasi Sundar — Founder, GIANT</title>
+<meta name="description" content="Founder of GIANT, building FirmRunner. BTech AIML student. Teaching AI from first principles.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; -webkit-font-smoothing: antialiased; }
+
+/* ── TOKENS ── */
+:root {
+  --black:   #0A0A0A;
+  --off-black: #111111;
+  --surface: #161616;
+  --border:  #242424;
+  --border-mid: #303030;
+  --mid:     #666666;
+  --dim:     #999999;
+  --white:   #F5F5F5;
+  --pure:    #FFFFFF;
+  --coral:   #D97757;   /* Claude / Anthropic brand coral */
+  --coral-dim: rgba(217,119,87,0.12);
+  --coral-border: rgba(217,119,87,0.3);
+
+  --serif: 'Instrument Serif', Georgia, serif;
+  --mono:  'DM Mono', monospace;
+  --sans:  'Geist', system-ui, sans-serif;
+
+  --max: 1080px;
+  --pad: clamp(24px, 5vw, 64px);
+}
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--sans);
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--pad);
+  height: 60px;
+  background: rgba(10,10,10,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  color: var(--white);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--dim);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.nav-links a:hover { color: var(--white); }
+
+.nav-cta {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--black);
+  background: var(--coral);
+  text-decoration: none;
+  padding: 8px 18px;
+  border-radius: 3px;
+  transition: opacity 0.15s;
+}
+
+.nav-cta:hover { opacity: 0.85; }
+
+/* ── LAYOUT ── */
+.container {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--pad);
+}
+
+section { position: relative; }
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 var(--pad) 80px;
+  border-bottom: 1px solid var(--border);
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.hero-pre {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--coral);
+  margin-bottom: 24px;
+  margin-top: 100px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero-pre::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--coral);
+}
+
+.hero-name {
+  font-family: var(--serif);
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 32px;
+}
+
+.hero-name em {
+  font-style: italic;
+  color: var(--coral);
+}
+
+.hero-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: end;
+  padding-top: 48px;
+  border-top: 1px solid var(--border);
+}
+
+.hero-desc {
+  font-size: 1rem;
+  color: var(--dim);
+  line-height: 1.75;
+  max-width: 420px;
+}
+
+.hero-desc strong { color: var(--white); font-weight: 400; }
+
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 14px;
+}
+
+.hero-actions .btn-row {
+  display: flex;
+  gap: 12px;
+}
+
+/* ── BUTTONS ── */
+.btn {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 11px 22px;
+  border-radius: 3px;
+  transition: opacity 0.15s, background 0.15s, color 0.15s;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-fill {
+  background: var(--coral);
+  color: var(--black);
+}
+
+.btn-fill:hover { opacity: 0.85; }
+
+.btn-outline {
+  background: transparent;
+  color: var(--white);
+  border: 1px solid var(--border-mid);
+}
+
+.btn-outline:hover { border-color: var(--white); }
+
+/* ── SECTION LABEL ── */
+.section-label {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--coral);
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-label::before {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: var(--coral);
+}
+
+/* ── SECTION TITLE ── */
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--white);
+}
+
+.section-title em {
+  font-style: italic;
+  color: var(--coral);
+}
+
+/* ── DIVIDER ── */
+hr.rule {
+  border: none;
+  border-top: 1px solid var(--border);
+}
+
+/* ── ABOUT ── */
+#about {
+  padding: 100px var(--pad);
+  max-width: var(--max);
+  margin: 0 auto;
+  border-bottom: 1px solid var(--border);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  align-items: start;
+  margin-top: 56px;
+}
+
+.about-body p {
+  font-size: 1rem;
+  color: var(--dim);
+  line-height: 1.85;
+  margin-bottom: 18px;
+}
+
+.about-body p strong { color: var(--white); font-weight: 400; }
+
+.about-body .lede {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  color: var(--white);
+  line-height: 1.5;
+  margin-bottom: 28px;
+  letter-spacing: -0.01em;
+}
+
+.about-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.meta-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 20px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.meta-row:first-child { border-top: 1px solid var(--border); }
+
+.meta-key {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mid);
+  padding-top: 2px;
+}
+
+.meta-val {
+  font-size: 0.9rem;
+  color: var(--white);
+  line-height: 1.6;
+}
+
+.meta-val a {
+  color: var(--coral);
+  text-decoration: none;
+  font-size: 0.82rem;
+  display: inline-block;
+  margin-right: 12px;
+  margin-bottom: 4px;
+  transition: opacity 0.15s;
+}
+
+.meta-val a:hover { opacity: 0.7; }
+
+/* ── FIRMRUNNER ── */
+#firmrunner {
+  padding: 100px var(--pad);
+  max-width: var(--max);
+  margin: 0 auto;
+  border-bottom: 1px solid var(--border);
+}
+
+.product-block {
+  margin-top: 56px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.product-header {
+  padding: 48px;
+  border-bottom: 1px solid var(--border);
+}
+
+.product-tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--coral);
+  border: 1px solid var(--coral-border);
+  background: var(--coral-dim);
+  padding: 3px 10px;
+  border-radius: 2px;
+  margin-bottom: 20px;
+}
+
+.product-headline {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 20px;
+  max-width: 700px;
+}
+
+.product-sub {
+  font-size: 0.95rem;
+  color: var(--dim);
+  line-height: 1.8;
+  max-width: 600px;
+  margin-bottom: 32px;
+}
+
+.product-sub strong { color: var(--white); font-weight: 400; }
+
+.agents-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border-top: 1px solid var(--border);
+}
+
+.agent {
+  padding: 28px 20px;
+  border-right: 1px solid var(--border);
+  transition: background 0.15s;
+}
+
+.agent:last-child { border-right: none; }
+.agent:hover { background: var(--surface); }
+
+.agent-num {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--coral);
+  margin-bottom: 10px;
+  letter-spacing: 0.06em;
+}
+
+.agent-name {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+
+.agent-desc {
+  font-size: 0.78rem;
+  color: var(--mid);
+  line-height: 1.55;
+}
+
+.market-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--border);
+}
+
+.mstat {
+  padding: 32px 40px;
+  border-right: 1px solid var(--border);
+}
+
+.mstat:last-child { border-right: none; }
+
+.mstat-num {
+  font-family: var(--serif);
+  font-size: 2.4rem;
+  color: var(--white);
+  letter-spacing: -0.03em;
+  margin-bottom: 8px;
+  line-height: 1;
+}
+
+.mstat-label {
+  font-size: 0.82rem;
+  color: var(--mid);
+  line-height: 1.5;
+  margin-bottom: 6px;
+}
+
+.mstat-source {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: #444;
+  letter-spacing: 0.04em;
+}
+
+/* ── PROJECTS ── */
+#projects {
+  padding: 100px var(--pad);
+  max-width: var(--max);
+  margin: 0 auto;
+  border-bottom: 1px solid var(--border);
+}
+
+.projects-list {
+  margin-top: 56px;
+  border-top: 1px solid var(--border);
+}
+
+.project-row {
+  display: grid;
+  grid-template-columns: 48px 1fr 200px;
+  gap: 40px;
+  align-items: start;
+  padding: 40px 0;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+}
+
+.project-row:hover { background: var(--surface); margin: 0 -24px; padding: 40px 24px; }
+
+.project-index {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--mid);
+  padding-top: 4px;
+}
+
+.project-main {}
+
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.tech-tag {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mid);
+  border: 1px solid var(--border-mid);
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+
+.project-name {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  color: var(--white);
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+
+.project-desc {
+  font-size: 0.88rem;
+  color: var(--mid);
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.project-impact {
+  font-size: 0.82rem;
+  color: var(--dim);
+  border-left: 2px solid var(--coral);
+  padding-left: 12px;
+  line-height: 1.6;
+}
+
+.project-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+  padding-top: 4px;
+}
+
+.project-link {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--coral);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap 0.15s;
+}
+
+.project-link:hover { gap: 10px; }
+.project-link::after { content: '↗'; }
+
+/* ── CONTENT ── */
+#content {
+  padding: 100px var(--pad);
+  max-width: var(--max);
+  margin: 0 auto;
+  border-bottom: 1px solid var(--border);
+}
+
+.content-grid {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 48px;
+}
+
+.platform-card {
+  padding: 40px;
+  border-right: 1px solid var(--border);
+  transition: background 0.15s;
+}
+
+.platform-card:last-child { border-right: none; }
+.platform-card:hover { background: var(--surface); }
+
+.platform-name {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--coral);
+  margin-bottom: 16px;
+}
+
+.platform-title {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  color: var(--white);
+  line-height: 1.35;
+  margin-bottom: 14px;
+  letter-spacing: -0.01em;
+}
+
+.platform-desc {
+  font-size: 0.85rem;
+  color: var(--mid);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.platform-meta {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--dim);
+  letter-spacing: 0.04em;
+  margin-bottom: 20px;
+}
+
+.topics-wrap {
+  margin-top: 40px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+}
+
+.topics-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 16px;
+}
+
+.topics-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.topic {
+  font-size: 0.8rem;
+  color: var(--dim);
+  border: 1px solid var(--border);
+  padding: 5px 14px;
+  border-radius: 100px;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.topic:hover { border-color: var(--coral); color: var(--white); cursor: default; }
+
+/* ── EXPERIENCE ── */
+#experience {
+  padding: 100px var(--pad);
+  max-width: var(--max);
+  margin: 0 auto;
+  border-bottom: 1px solid var(--border);
+}
+
+.exp-list {
+  margin-top: 56px;
+  border-top: 1px solid var(--border);
+}
+
+.exp-row {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 40px;
+  padding: 36px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.exp-period {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--mid);
+  letter-spacing: 0.04em;
+  padding-top: 3px;
+  line-height: 1.5;
+}
+
+.exp-body {}
+
+.exp-role {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+.exp-org {
+  font-size: 0.82rem;
+  color: var(--coral);
+  margin-bottom: 12px;
+  font-weight: 400;
+}
+
+.exp-desc {
+  font-size: 0.88rem;
+  color: var(--mid);
+  line-height: 1.7;
+}
+
+/* ── SKILLS ── */
+#skills {
+  padding: 100px var(--pad);
+  max-width: var(--max);
+  margin: 0 auto;
+  border-bottom: 1px solid var(--border);
+}
+
+.skills-grid {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.skill-col {
+  padding: 36px 32px;
+  border-right: 1px solid var(--border);
+}
+
+.skill-col:last-child { border-right: none; }
+
+.skill-col-title {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--coral);
+  margin-bottom: 20px;
+}
+
+.skill-items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.skill-items li {
+  font-size: 0.85rem;
+  color: var(--mid);
+  line-height: 1.4;
+}
+
+/* ── CERTS ── */
+#achievements {
+  padding: 100px var(--pad);
+  max-width: var(--max);
+  margin: 0 auto;
+  border-bottom: 1px solid var(--border);
+}
+
+.certs-grid {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.cert {
+  background: var(--black);
+  padding: 28px 32px;
+  transition: background 0.15s;
+}
+
+.cert:hover { background: var(--surface); }
+
+.cert-name {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+
+.cert-org {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  color: var(--mid);
+}
+
+/* ── CONTACT ── */
+#contact {
+  padding: 120px var(--pad) 80px;
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.contact-inner {
+  max-width: 640px;
+}
+
+.contact-title {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 28px;
+  margin-top: 40px;
+}
+
+.contact-title em {
+  font-style: italic;
+  color: var(--coral);
+}
+
+.contact-body {
+  font-size: 1rem;
+  color: var(--dim);
+  line-height: 1.8;
+  margin-bottom: 40px;
+}
+
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 28px var(--pad);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.footer-name {
+  font-family: var(--serif);
+  font-size: 0.9rem;
+  color: var(--mid);
+}
+
+.footer-right {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: #3a3a3a;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ── FADE IN ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 860px) {
+  .about-grid { grid-template-columns: 1fr; gap: 48px; }
+  .hero-bottom { grid-template-columns: 1fr; gap: 32px; }
+  .hero-actions { align-items: flex-start; }
+  .agents-row { grid-template-columns: 1fr 1fr 1fr; }
+  .market-row { grid-template-columns: 1fr; }
+  .mstat { border-right: none; border-bottom: 1px solid var(--border); }
+  .mstat:last-child { border-bottom: none; }
+  .content-grid { grid-template-columns: 1fr; }
+  .platform-card { border-right: none; border-bottom: 1px solid var(--border); }
+  .platform-card:last-child { border-bottom: none; }
+  .skills-grid { grid-template-columns: 1fr 1fr; }
+  .skill-col:nth-child(2n) { border-right: none; }
+  .skill-col:nth-child(n+3) { border-top: 1px solid var(--border); }
+  .certs-grid { grid-template-columns: 1fr 1fr; }
+  .project-row { grid-template-columns: 1fr; gap: 16px; }
+  .project-index { display: none; }
+  .project-aside { align-items: flex-start; }
+  .exp-row { grid-template-columns: 1fr; gap: 8px; }
+  .nav-links { display: none; }
+  .market-row { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 560px) {
+  .agents-row { grid-template-columns: 1fr 1fr; }
+  .agent:last-child:nth-child(odd) { grid-column: span 2; }
+  .skills-grid { grid-template-columns: 1fr; }
+  .skill-col { border-right: none; border-bottom: 1px solid var(--border); }
+  .certs-grid { grid-template-columns: 1fr; }
+  .market-row { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 12px; text-align: center; }
+}
+</style>
 </head>
 <body>
 
-    <main class="container">
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Sasi Sundar</a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#firmrunner">FirmRunner</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#content">Writing</a></li>
+      <li><a href="#experience">Experience</a></li>
+    </ul>
+    <a href="mailto:sasisundhar2211@gmail.com" class="nav-cta">Contact</a>
+  </div>
+</nav>
 
-        <section id="hero" class="hero">
-            <h1 class="hero-title">Sasi Sundar</h1>
-            <p class="hero-tagline">Building end-to-end AI/ML systems with Python, LLMs, and modern interface tooling.</p>
-        </section>
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-pre">Pre-Seed Founder, GIANT &nbsp;·&nbsp; Visakhapatnam, India</div>
 
-        <section id="about" class="about">
-            <div class="about-content">
-                <div class="about-text">
-                    <p>I’m an AI/ML student researcher developing end-to-end Python pipelines and building practical experience with LLMs, agents, RAG, and MCP as I advance toward deeper expertise. I’ve delivered over fifteen ML and LLM projects covering data processing, model training, evaluation, and deployment-ready serving. My workflows are reproducible through Dockerized environments and CI/CD. I work effectively with GenAI and prompt engineering, and I learn new technologies at high speed, enabling fast iteration from concept to functioning system. My focus is mastering the full lifecycle of modern AI systems and growing into robust agentic and reasoning-centered architectures.</p>
-                </div>
-            </div>
-        </section>
-    
-        <section id="skills">
-            <h2>Technical Competencies</h2>
-            <div class="skills-categories">
-                <div class="skills-category">
-                    <h3>AI/ML Engineering</h3>
-                    <ul>
-                        <li>Machine learning: supervised, unsupervised, feature engineering, and model evaluation.</li>
-                        <li>Deep learning with PyTorch and TensorFlow for image, text, and sequence models.</li>
-                        <li>LLMs, prompt engineering, LangChain, RAG, and function-calling workflows.</li>
-                        <li>Agentic pipelines with multi-step reasoning and tool integration.</li>
-                        <li>NLP: embeddings, tokenization, preprocessing, and classic NLP techniques.</li>
-                        <li>Computer vision with OpenCV and custom preprocessing.</li>
-                        <li>Python data stack: NumPy, Pandas, quantitative analysis.</li>
-                    </ul>
-                </div>
-                <div class="skills-category">
-                    <h3>Backend, APIs, and Systems</h3>
-                    <ul>
-                        <li>Python for backend development and ML system orchestration.</li>
-                        <li>FastAPI and Flask for REST services and model serving.</li>
-                        <li>JavaScript, TypeScript, Node.js, Express.js for backend web services.</li>
-                        <li>API design: routing, async flows, and ML/LLM inference endpoints.</li>
-                        <li>Integration of OpenAI and other LLM APIs.</li>
-                    </ul>
-                </div>
-                <div class="skills-category">
-                    <h3>Cloud, DevOps, and MLOps</h3>
-                    <ul>
-                        <li>AWS and Google Cloud for compute, deployment, and service orchestration.</li>
-                        <li>Docker for reproducible, containerized ML/LLM environments.</li>
-                        <li>Kubernetes fundamentals for orchestration workflows.</li>
-                        <li>CI/CD with GitHub Actions for automated builds and deployments.</li>
-                        <li>Databases: SQL (MySQL, PostgreSQL), MongoDB, Firebase.</li>
-                        <li>MLOps: versioning, environment management, deployment automation.</li>
-                    </ul>
-                </div>
-                <div class="skills-category">
-                    <h3>Frontend and Interface Engineering</h3>
-                    <ul>
-                        <li>React.js for interactive dashboards, admin panels, and ML tooling interfaces.</li>
-                        <li>ADK for relevant application development workflows.</li>
-                    </ul>
-                </div>
-                <div class="skills-category">
-                    <h3>Software Engineering Foundations</h3>
-                    <ul>
-                        <li>Data structures and algorithms for performance-oriented problem solving.</li>
-                        <li>Git and GitHub for version control and collaborative development.</li>
-                        <li>Agile development practices, debugging workflows, and code quality standards.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-    
-        <section id="projects" class="projects-new">
-            <header class="section-header">
-                <h2>Selected Projects</h2>
-                <p>End-to-end AI/ML and LLM systems I’ve designed, implemented, and deployed.</p>
-            </header>
-            <div class="projects-grid-new">
-                <div class="project-case-study">
-                    <h3>Procurement Agent System</h3>
-                    <p class="role-type">LLM Procurement Agent · Information Extraction</p>
-                    <div class="case-study-section">
-                        <p><strong>Problem:</strong> Manual contract review was slow and inconsistent across large volumes of procurement documents.</p>
-                        <p><strong>Solution:</strong> Built an LLM-driven pipeline for pricing-anomaly detection and structured contract-field extraction from raw text.</p>
-                        <p><strong>Impact:</strong> Standardized outputs across contract samples and reduced human review effort for recurring document types.</p>
-                    </div>
-                    <div class="tech-stack">
-                        <div class="pills">
-                            <span class="pill">Python</span>
-                            <span class="pill">LLMs</span>
-                            <span class="pill">GenAI</span>
-                            <span class="pill">NLP</span>
-                        </div>
-                    </div>
-                    <div class="links-row">
-                        <a href="https://github.com/Sasisundar2211/Procurement_Agent" class="btn">GitHub</a>
-                        <a href="#" class="btn btn-secondary">Demo</a>
-                    </div>
-                </div>
-                <div class="project-case-study">
-                    <h3>Multitool LLM Agent</h3>
-                    <p class="role-type">Agentic LLM System · Tool-Use Orchestration</p>
-                    <div class="case-study-section">
-                        <p><strong>Problem:</strong> Needed a controlled environment to test multi-step reasoning and tool-calling workflows for LLM agents.</p>
-                        <p><strong>Solution:</strong> Engineered an API-integrated agent that chains tools, function calls, and reasoning steps via FastAPI.</p>
-                        <p><strong>Impact:</strong> Created a reusable testbed for experiments in agent behavior, tool integration, and controllable inference.</p>
-                    </div>
-                    <div class="tech-stack">
-                        <div class="pills">
-                            <span class="pill">Python</span>
-                            <span class="pill">FastAPI</span>
-                            <span class="pill">GenAI</span>
-                            <span class="pill">LangChain</span>
-                        </div>
-                    </div>
-                    <div class="links-row">
-                        <a href="https://github.com/Sasisundar2211/sample_multitool_agent" class="btn">GitHub</a>
-                        <a href="#" class="btn btn-secondary">Demo</a>
-                    </div>
-                </div>
-                <div class="project-case-study">
-                    <h3>AI Resume Ranking System</h3>
-                    <p class="role-type">NLP Pipeline · ML Classification · Web Service</p>
-                    <div class="case-study-section">
-                        <p><strong>Problem:</strong> Recruiter-style resume screening was manual and inconsistent for different candidate profiles.</p>
-                        <p><strong>Solution:</strong> Built an NLP pipeline using TF-IDF features and ML classifiers, exposed via a Flask API for scoring resumes.</p>
-                        <p><strong>Impact:</strong> Increased ranking consistency and enabled plug-and-play integration of the model into external workflows.</p>
-                    </div>
-                    <div class="tech-stack">
-                        <div class="pills">
-                            <span class="pill">Python</span>
-                            <span class="pill">scikit-learn</span>
-                            <span class="pill">NLP</span>
-                            <span class="pill">Flask</span>
-                        </div>
-                    </div>
-                    <div class="links-row">
-                        <a href="https://github.com/Sasisundar2211/AI-Resume_Ranking-app" class="btn">GitHub</a>
-                        <a href="#" class="btn btn-secondary">Demo</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    
-        <section id="experience">
-            <h2>Work Experiences</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date">2023 – Present</div>
-                    <h3>Independent AI/ML Developer</h3>
-                    <p>Delivered 15+ ML/LLM systems by building end-to-end Python pipelines integrating LLMs, data processing, and model serving.</p>
-                    <ul>
-                        <li>Improved reproducibility of experiments by containerizing deployments with Docker + CI/CD.</li>
-                        <li>Designed function-calling, multi-step reasoning modules aligned with NLU, agent reasoning, and applied-ML research tasks.</li>
-                        <li>Led a 3-member GenAI prototyping group, overseeing task assignments, experimentation, and evaluations.</li>
-                    </ul>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">May 2025 – July 2025</div>
-                    <h3>AI/ML Intern</h3>
-                    <h4>BITS Pilani, Hyderabad Campus</h4>
-                    <p>Designed and implemented practical machine learning solutions, building and optimizing end-to-end models for real-world decision-making.</p>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">January 2025 – May 2025</div>
-                    <h3>Undergraduate Research Contributor</h3>
-                    <h4>Parvathaneni Brahmayya Siddhartha College of Arts & Science</h4>
-                    <p>Contributed to an academic research paper on applied AI/ML techniques, participating in ideation, technical write-ups, and literature analysis.</p>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">February 2025 – March 2025</div>
-                    <h3>AI Intern – TechSaksham (Microsoft & SAP)</h3>
-                    <h4>Edunet Foundation / AICTE</h4>
-                    <p>Selected for a prestigious internship by Microsoft and SAP, focusing on applying AI and software engineering to real-world challenges.</p>
-                </div>
-            </div>
-        </section>
-    
-        <section id="education">
-            <h2>Education</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date">September 2023 - Pursuing</div>
-                    <h3>BTech in AI & Machine Learning - PSCMR College of Engineering and Technology</h3>
-                    <p>Currently exploring advanced topics in AI, including Large Language Models (LLMs) and Agentic workflows, alongside core full-stack development principles. Maintaining an overall CGPA of 8.2.</p>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">September 2021 - March 2023</div>
-                    <h3>Intermediate in MPC - Behara Defence Academy And Junior College</h3>
-                    <p>Overall CGPA 77.4%</p>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">September 2020 – March 2021</div>
-                    <h3>Schooling - Sriprakash Vidyaniketan</h3>
-                    <p>Overall CGPA - 72%</p>
-                </div>
-            </div>
-        </section>
-        
-        <section id="certifications">
-            <h2>Certifications & Achievements</h2>
-            <div class="certification-list">
-                <div class="certification-item">
-                    <h3>JPMorgan Quantitative Research Simulation</h3>
-                    <p>Completed a rigorously assessed quantitative-analysis simulation, applying statistical and computational methods to financial datasets.</p>
-                </div>
-                <div class="certification-item">
-                    <h3>Hackathon Participant (Devnovate & GDG Build With AI)</h3>
-                    <p>Actively participated in national hackathons, delivering functional prototypes focusing on rapid system design, LLM, and GenAI tooling.</p>
-                </div>
-                 <div class="certification-item">
-                    <h3>Data Analyst (Job Simulation)</h3>
-                    <p>Completed a virtual job simulation at Deloitte involving data analysis, dashboard creation with Tableau, and data classification with Excel.</p>
-                </div>
-                <div class="certification-item">
-                    <h3>AI Fluency Certification</h3>
-                    <p>Verified proficiency in fundamental AI concepts and applications.</p>
-                </div>
-                <div class="certification-item">
-                    <h3>Code Vipassana Challenge</h3>
-                    <p>Participated in a coding challenge focused on problem-solving and algorithmic thinking.</p>
-                </div>
-                <div class="certification-item">
-                    <h3>Google Cloud Training</h3>
-                    <p>Completed training modules on Google Cloud Platform services.</p>
-                </div>
-            </div>
-        </section>
+  <h1 class="hero-name">
+    Bobbili Somanadh<br>
+    Vasudevara <em>Sasi Sundar</em>
+  </h1>
 
-        <section id="contact">
-            <h2>Contact</h2>
-            <div class="contact-info">
-                <p>sasisundhar2211@gmail.com</p>
-                <p>Vijayawada, India</p>
-            </div>
-            <div class="social-links">
-                <a href="https://github.com/Sasisundar2211" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                </a>
-                <a href="https://www.linkedin.com/in/bsv-sasi-sundar/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                </a>
-            </div>
-        </section>
+  <div class="hero-bottom">
+    <p class="hero-desc">
+      I am a third-year BTech AIML student and the founder of GIANT. I am building <strong>FirmRunner</strong>, an AI Agent Suite for accounting firms and professional service SMBs. I ship real product. I build in public. I explain AI the way a founder building with it every day actually sees it.
+    </p>
+    <div class="hero-actions">
+      <div class="btn-row">
+        <a href="#firmrunner" class="btn btn-fill">See FirmRunner</a>
+        <a href="https://substack.com/@sasisundar" target="_blank" rel="noopener" class="btn btn-outline">Read My Writing</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-    </main>
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-label">About</div>
+    <h2 class="section-title">Founder building in public.<br><em>Creator teaching in depth.</em></h2>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Sasi Sundar. All Rights Reserved.</p>
+    <div class="about-grid">
+      <div class="about-body reveal">
+        <p class="lede">Most people explain AI from the outside. I explain it from inside a product that runs on it every day.</p>
+        <p>I am a third-year BTech student in AI and Machine Learning at PSCMR College of Engineering and Technology, Vijayawada. While most of my peers study AI in theory, I am building a company with it.</p>
+        <p>GIANT is my pre-seed company. FirmRunner is its first product: an AI Agent Suite that handles the operational work that kills small accounting firms. Client intake, document collection, billing reminders, deadline tracking, and scheduling. <strong>No setup. No API keys. No technical team required.</strong></p>
+        <p>On the content side, I write and teach AI from first principles across LinkedIn, X, and Substack under my newsletter, The Build Layer. I write for students building careers in AI, engineers who want peer-level depth, and business leaders who need to understand what their teams are actually building.</p>
+        <p>I have 2 Substack subscribers today. I have shipped 15+ AI systems. I am early, honest about where I am, and moving fast.</p>
+      </div>
+
+      <div class="about-meta reveal">
+        <div class="meta-row">
+          <div class="meta-key">Company</div>
+          <div class="meta-val">GIANT (Global Inertia and Negligence Gap), Pre-Seed</div>
         </div>
-    </footer>
+        <div class="meta-row">
+          <div class="meta-key">Product</div>
+          <div class="meta-val">FirmRunner, AI Agent Suite for Professional Service SMBs</div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-key">Focus Markets</div>
+          <div class="meta-val">US-First, India-Second</div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-key">Education</div>
+          <div class="meta-val">BTech AIML, Year 3 of 4, CGPA 8.2, PSCMR College of Engineering</div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-key">Location</div>
+          <div class="meta-val">Visakhapatnam, Andhra Pradesh, India</div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-key">Platforms</div>
+          <div class="meta-val">
+            <a href="https://www.linkedin.com/in/bsv-sasi-sundar" target="_blank" rel="noopener">LinkedIn ↗</a>
+            <a href="https://x.com/SasiSundar09" target="_blank" rel="noopener">X ↗</a>
+            <a href="https://substack.com/@sasisundar" target="_blank" rel="noopener">Substack ↗</a>
+            <a href="https://github.com/SasiSundar2211" target="_blank" rel="noopener">GitHub ↗</a>
+          </div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-key">Email</div>
+          <div class="meta-val">
+            <a href="mailto:sasisundhar2211@gmail.com">sasisundhar2211@gmail.com ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- FIRMRUNNER -->
+<section id="firmrunner">
+  <div class="container">
+    <div class="section-label">The Product</div>
+    <h2 class="section-title">FirmRunner</h2>
+
+    <div class="product-block reveal">
+      <div class="product-header">
+        <div class="product-tag">Pre-Seed · Active Build</div>
+        <h3 class="product-headline">A 5-person accounting firm loses roughly $90,000 a year to work no one bills for. FirmRunner is built to close that gap.</h3>
+        <p class="product-sub">30% of every working hour in accounting is non-billable. That is not a calculation problem. It is an operations problem. FirmRunner ships <strong>five pre-configured AI agents</strong> that handle the work no one wants to do but every firm pays for. Firms get running in under 10 minutes. No API keys. No technical setup. No IT team required.</p>
+        <p class="product-sub" style="margin-bottom:0;">Pricing: $199 to $499 per month per firm. 10-question onboarding. Zero setup friction.</p>
+      </div>
+
+      <div class="agents-row">
+        <div class="agent">
+          <div class="agent-num">01</div>
+          <div class="agent-name">Client Intake</div>
+          <div class="agent-desc">Captures new client data and routes it to the right workflow without manual entry</div>
+        </div>
+        <div class="agent">
+          <div class="agent-num">02</div>
+          <div class="agent-name">Document Collection</div>
+          <div class="agent-desc">Follows up on missing documents without a single manual email from the team</div>
+        </div>
+        <div class="agent">
+          <div class="agent-num">03</div>
+          <div class="agent-name">Billing Follow-Up</div>
+          <div class="agent-desc">AI-generated reminders cut invoice payment time by 45% (Intuit data via GIANT)</div>
+        </div>
+        <div class="agent">
+          <div class="agent-num">04</div>
+          <div class="agent-name">Deadline Tracking</div>
+          <div class="agent-desc">Monitors filing deadlines and alerts the team before anything slips through</div>
+        </div>
+        <div class="agent">
+          <div class="agent-num">05</div>
+          <div class="agent-name">Scheduling</div>
+          <div class="agent-desc">Handles meeting coordination and calendar management without back-and-forth</div>
+        </div>
+      </div>
+
+      <div class="market-row">
+        <div class="mstat">
+          <div class="mstat-num">$567B</div>
+          <div class="mstat-label">Global SMB AI market by 2032, up from $194.6B in 2024</div>
+          <div class="mstat-source">Credence Research, 2024</div>
+        </div>
+        <div class="mstat">
+          <div class="mstat-num">71%</div>
+          <div class="mstat-label">Of SMEs use AI only peripherally. The 29% in core adoption are pulling away.</div>
+          <div class="mstat-source">OECD, 2025</div>
+        </div>
+        <div class="mstat">
+          <div class="mstat-num">$2B+</div>
+          <div class="mstat-label">EvenUp valuation — legal AI agents, single vertical. The professional services opportunity is validated.</div>
+          <div class="mstat-source">October 2025</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 32px;">
+      <a href="mailto:sasisundhar2211@gmail.com?subject=FirmRunner%20Inquiry" class="btn btn-fill">Reach Out About FirmRunner</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="section-label">Technical Work</div>
+    <h2 class="section-title">15+ AI systems built.<br><em>All open. All shipped.</em></h2>
+
+    <div class="projects-list">
+
+      <div class="project-row reveal">
+        <div class="project-index">01</div>
+        <div class="project-main">
+          <div class="project-tech">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">LLMs</span>
+            <span class="tech-tag">NLP</span>
+          </div>
+          <div class="project-name">Procurement Agent System</div>
+          <p class="project-desc">Manual contract review was slow and inconsistent across large procurement document volumes. Built an LLM-driven pipeline for pricing-anomaly detection and structured field extraction from raw contract text.</p>
+          <p class="project-impact">Standardized outputs across contract samples and reduced human review effort for recurring document types.</p>
+        </div>
+        <div class="project-aside">
+          <a href="https://github.com/Sasisundar2211/Procurement_Agent" target="_blank" rel="noopener" class="project-link">GitHub</a>
+        </div>
+      </div>
+
+      <div class="project-row reveal">
+        <div class="project-index">02</div>
+        <div class="project-main">
+          <div class="project-tech">
+            <span class="tech-tag">FastAPI</span>
+            <span class="tech-tag">LangChain</span>
+            <span class="tech-tag">Tool Use</span>
+          </div>
+          <div class="project-name">Multitool LLM Agent</div>
+          <p class="project-desc">Testing multi-step reasoning and tool-calling workflows for LLM agents requires a controlled environment that most existing frameworks do not provide cleanly. Built an API-integrated agent that chains tools, function calls, and reasoning steps via FastAPI.</p>
+          <p class="project-impact">Reusable testbed for agent behavior and tool integration. Directly informs FirmRunner's agent architecture.</p>
+        </div>
+        <div class="project-aside">
+          <a href="https://github.com/Sasisundar2211/sample_multitool_agent" target="_blank" rel="noopener" class="project-link">GitHub</a>
+        </div>
+      </div>
+
+      <div class="project-row reveal">
+        <div class="project-index">03</div>
+        <div class="project-main">
+          <div class="project-tech">
+            <span class="tech-tag">scikit-learn</span>
+            <span class="tech-tag">NLP</span>
+            <span class="tech-tag">Flask</span>
+          </div>
+          <div class="project-name">AI Resume Ranking System</div>
+          <p class="project-desc">Recruiter-style resume screening was manual and inconsistent. Different reviewers scored identical candidates differently based on fatigue, not merit. Built an NLP pipeline using TF-IDF features and ML classifiers exposed via a Flask API.</p>
+          <p class="project-impact">Increased ranking consistency and enabled plug-and-play integration into external hiring workflows.</p>
+        </div>
+        <div class="project-aside">
+          <a href="https://github.com/Sasisundar2211/AI-Resume_Ranking-app" target="_blank" rel="noopener" class="project-link">GitHub</a>
+        </div>
+      </div>
+
+      <div class="project-row reveal">
+        <div class="project-index">+ 12</div>
+        <div class="project-main">
+          <div class="project-tech">
+            <span class="tech-tag">RAG</span>
+            <span class="tech-tag">MCP</span>
+            <span class="tech-tag">Docker</span>
+            <span class="tech-tag">CI/CD</span>
+          </div>
+          <div class="project-name">More on GitHub</div>
+          <p class="project-desc">Computer vision pipelines, RAG systems, NLP classifiers, LangChain agents, FastAPI services, and MCP-integrated tools. All Dockerized with CI/CD via GitHub Actions. End-to-end systems, not Jupyter notebooks.</p>
+        </div>
+        <div class="project-aside">
+          <a href="https://github.com/SasiSundar2211" target="_blank" rel="noopener" class="project-link">All Projects</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<section id="content">
+  <div class="container">
+    <div class="section-label">Content and Writing</div>
+    <h2 class="section-title">Teaching AI the way<br><em>a founder sees it.</em></h2>
+
+    <div class="content-grid reveal">
+      <div class="platform-card">
+        <div class="platform-name">LinkedIn</div>
+        <div class="platform-title">Founder observations and sourced market analysis</div>
+        <p class="platform-desc">150 to 300 words per post. One sourced data point. One observation only someone building in this space would make. No hashtags. No filler.</p>
+        <div class="platform-meta">Weekdays, 8 to 10 AM IST</div>
+        <a href="https://www.linkedin.com/in/bsv-sasi-sundar" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:0.74rem; padding: 8px 16px;">Follow ↗</a>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-name">X / Twitter</div>
+        <div class="platform-title">10-tweet threads built from first principles</div>
+        <p class="platform-desc">Every thread starts with a counterintuitive fact. Every tweet is self-contained. The hook tweet works standalone. Three threads a week, plus standalones.</p>
+        <div class="platform-meta">3 threads per week</div>
+        <a href="https://x.com/SasiSundar09" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:0.74rem; padding: 8px 16px;">Follow ↗</a>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-name">Substack</div>
+        <div class="platform-title">The Build Layer — weekly newsletter on AI and the build</div>
+        <p class="platform-desc">800 to 1,500 words every Wednesday. Prose only. One central idea, explained from first principles and grounded in what I am actually building with FirmRunner.</p>
+        <div class="platform-meta">Every Wednesday</div>
+        <a href="https://substack.com/@sasisundar" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:0.74rem; padding: 8px 16px;">Subscribe ↗</a>
+      </div>
+    </div>
+
+    <div class="topics-wrap reveal">
+      <div class="topics-label">Topics I cover</div>
+      <div class="topics-row">
+        <span class="topic">AI Fundamentals</span>
+        <span class="topic">Large Language Models</span>
+        <span class="topic">Agentic AI</span>
+        <span class="topic">Prompt Engineering</span>
+        <span class="topic">ML from First Principles</span>
+        <span class="topic">SMB AI Adoption</span>
+        <span class="topic">Founder Build Updates</span>
+        <span class="topic">AI Industry Analysis</span>
+        <span class="topic">RAG Systems</span>
+        <span class="topic">Deep Learning</span>
+        <span class="topic">Vibe Coding</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-label">Experience</div>
+    <h2 class="section-title">Where I have built<br><em>and what I have shipped.</em></h2>
+
+    <div class="exp-list">
+
+      <div class="exp-row reveal">
+        <div class="exp-period">2024 – Present</div>
+        <div class="exp-body">
+          <div class="exp-role">Founder, GIANT / FirmRunner</div>
+          <div class="exp-org">GIANT (Pre-Seed Stage)</div>
+          <p class="exp-desc">Building FirmRunner from zero. Product decisions, market research, customer conversations, technical architecture, and content strategy. Every function of the company runs through me.</p>
+        </div>
+      </div>
+
+      <div class="exp-row reveal">
+        <div class="exp-period">2023 – Present</div>
+        <div class="exp-body">
+          <div class="exp-role">Independent AI/ML Developer</div>
+          <div class="exp-org">Self-directed, 15+ systems shipped</div>
+          <p class="exp-desc">End-to-end Python pipelines integrating LLMs, RAG, agents, and MCP. Dockerized environments. CI/CD with GitHub Actions. Led a 3-member GenAI prototyping group covering task assignments, experimentation, and evaluation.</p>
+        </div>
+      </div>
+
+      <div class="exp-row reveal">
+        <div class="exp-period">May 2025 – Jul 2025</div>
+        <div class="exp-body">
+          <div class="exp-role">AI/ML Intern</div>
+          <div class="exp-org">BITS Pilani, Hyderabad Campus</div>
+          <p class="exp-desc">Designed and implemented practical machine learning solutions. Built and optimized end-to-end models for real-world decision-making tasks under academic supervision at one of India's top technical institutions.</p>
+        </div>
+      </div>
+
+      <div class="exp-row reveal">
+        <div class="exp-period">Feb 2025 – Mar 2025</div>
+        <div class="exp-body">
+          <div class="exp-role">AI Intern, TechSaksham</div>
+          <div class="exp-org">Microsoft and SAP via Edunet Foundation / AICTE</div>
+          <p class="exp-desc">Selected for a competitive AI internship backed by Microsoft and SAP. Applied AI and software engineering to real-world industry challenges under the AICTE-approved program.</p>
+        </div>
+      </div>
+
+      <div class="exp-row reveal">
+        <div class="exp-period">Jan 2025 – May 2025</div>
+        <div class="exp-body">
+          <div class="exp-role">Undergraduate Research Contributor</div>
+          <div class="exp-org">PSCMR College of Engineering and Technology</div>
+          <p class="exp-desc">Contributed to an applied AI/ML research paper. Participated in ideation, technical writing, and literature analysis on AI techniques.</p>
+        </div>
+      </div>
+
+      <div class="exp-row reveal">
+        <div class="exp-period">Sep 2023 – Present</div>
+        <div class="exp-body">
+          <div class="exp-role">BTech, Artificial Intelligence and Machine Learning</div>
+          <div class="exp-org">PSCMR College of Engineering and Technology, Vijayawada</div>
+          <p class="exp-desc">CGPA 8.2. Coursework in LLMs, agentic workflows, deep learning, and full-stack development. Running GIANT in parallel with the degree.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-label">Technical Skills</div>
+    <h2 class="section-title">The full stack<br><em>of what I build with.</em></h2>
+
+    <div class="skills-grid reveal">
+      <div class="skill-col">
+        <div class="skill-col-title">AI / ML</div>
+        <ul class="skill-items">
+          <li>LLMs and prompt engineering</li>
+          <li>Agentic pipelines, tool use</li>
+          <li>RAG and vector search</li>
+          <li>LangChain, MCP integration</li>
+          <li>PyTorch, TensorFlow</li>
+          <li>NLP, embeddings, tokenization</li>
+          <li>Computer vision, OpenCV</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <div class="skill-col-title">Backend and APIs</div>
+        <ul class="skill-items">
+          <li>Python end-to-end</li>
+          <li>FastAPI, Flask</li>
+          <li>Node.js, Express.js</li>
+          <li>REST API design</li>
+          <li>OpenAI and Anthropic APIs</li>
+          <li>Function calling workflows</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <div class="skill-col-title">Cloud and DevOps</div>
+        <ul class="skill-items">
+          <li>AWS, Google Cloud</li>
+          <li>Docker, containerization</li>
+          <li>Kubernetes fundamentals</li>
+          <li>GitHub Actions, CI/CD</li>
+          <li>PostgreSQL, MongoDB, Firebase</li>
+          <li>MLOps and versioning</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <div class="skill-col-title">Frontend and Data</div>
+        <ul class="skill-items">
+          <li>React.js dashboards</li>
+          <li>TypeScript, JavaScript</li>
+          <li>NumPy, Pandas</li>
+          <li>Data visualization, Tableau</li>
+          <li>MySQL, SQL queries</li>
+          <li>Git and GitHub</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="container">
+    <div class="section-label">Certifications and Achievements</div>
+    <h2 class="section-title">Credentials that<br><em>earned their place.</em></h2>
+
+    <div class="certs-grid reveal" style="margin-top: 56px;">
+      <div class="cert">
+        <div class="cert-name">JPMorgan Quantitative Research Simulation</div>
+        <div class="cert-org">JPMorgan Chase</div>
+      </div>
+      <div class="cert">
+        <div class="cert-name">TechSaksham AI Internship</div>
+        <div class="cert-org">Microsoft and SAP via Edunet Foundation / AICTE</div>
+      </div>
+      <div class="cert">
+        <div class="cert-name">Data Analyst Job Simulation</div>
+        <div class="cert-org">Deloitte — Tableau, Excel classification</div>
+      </div>
+      <div class="cert">
+        <div class="cert-name">Hackathon Participant</div>
+        <div class="cert-org">Devnovate and GDG Build With AI</div>
+      </div>
+      <div class="cert">
+        <div class="cert-name">AI Fluency Certification</div>
+        <div class="cert-org">Verified AI concepts proficiency</div>
+      </div>
+      <div class="cert">
+        <div class="cert-name">Google Cloud Training</div>
+        <div class="cert-org">Google Cloud Platform — compute, deployment, orchestration</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-label">Get in Touch</div>
+    <h2 class="contact-title">If you are building<br>something <em>serious,</em><br>I want to talk.</h2>
+    <p class="contact-body">I am open to conversations with investors, early customers in accounting and professional services, fellow founders, and media. I also publish on AI and building in public — reach out if you want to collaborate on content or be featured in The Build Layer.</p>
+
+    <div class="contact-actions">
+      <a href="mailto: sasisundhar2211@gmail.com" class="btn btn-fill">Send an Email</a>
+      <a href="https://www.linkedin.com/in/bsv-sasi-sundar" target="_blank" rel="noopener" class="btn btn-outline">LinkedIn</a>
+      <a href="https://x.com/SasiSundar09" target="_blank" rel="noopener" class="btn btn-outline">X / Twitter</a>
+      <a href="https://substack.com/@sasisundar" target="_blank" rel="noopener" class="btn btn-outline">Substack</a>
+      <a href="https://github.com/SasiSundar2211" target="_blank" rel="noopener" class="btn btn-outline">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Sasi Sundar — GIANT / FirmRunner</div>
+  <div class="footer-right">Visakhapatnam, India · US-First · 2025</div>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(el => {
+    if (el.isIntersecting) {
+      el.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Nav active state
+const sections = document.querySelectorAll('section[id]');
+const navAs = document.querySelectorAll('.nav-links a');
+
+function updateNav() {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 100) current = s.id;
+  });
+  navAs.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + current ? 'var(--white)' : '';
+  });
+}
+
+window.addEventListener('scroll', updateNav, { passive: true });
+updateNav();
+</script>
 </body>
 </html>
